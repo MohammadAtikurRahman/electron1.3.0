@@ -1,0 +1,97 @@
+{
+  "name": "electron-quick-start",
+  "version": "1.0.0",
+  "description": "A minimal Electron application integrated with the product_api",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "serve-build": "serve -s build",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "api-start": "node server.js",
+    "api-dev": "nodemon server.js"
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo",
+    "product_api"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "electron-is-dev": "^2.0.0",
+    "express": "^4.18.2",
+    "imdb-api": "^4.4.1",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^3.1.2",
+    "moment": "^2.29.4",
+    "mongodb": "^6.1.0",
+    "mongodb-memory-server": "^8.15.1",
+    "mongoose": "^5.13.20",
+    "multer": "^1.4.4",
+    "nedb": "^1.8.0",
+    "shortid": "^2.2.16",
+    "tcp-port-used": "^1.0.2",
+    "tingodb": "^0.6.1",
+    "tungus": "^0.0.5"
+  },
+  "devDependencies": {
+    "concurrently": "^6.5.1",
+    "electron": "^26.2.0",
+    "electron-builder": "^23.6.0",
+    "nodemon": "^2.0.20",
+    "serve": "^14.2.1"
+  },
+  "build": {
+    "appId": "com.yourcompany.yourAppId",
+    "productName": "DLAB",
+    "directories": {
+      "output": "install"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer.js",
+      "styles.css",
+      "build/**/*",
+      "index.html",
+      "controllers/**/*",
+      "model/**/*",
+      "routes.js",
+      "package.json",
+      "node_modules",
+      "server.js",
+      "helpers/**/*",
+      "mongodb-binaries/**/*",
+      "mongodb-data/**/*",
+      "controllers/**/*",
+      "helpers/**/*",
+      "model/**/*",
+
+      "data/**/*"
+    ],
+    "asar": true,
+    "asarUnpack": [
+      "mongodb-data/**/*",
+      "mongodb-binaries/**/*",
+      "data/**/*",
+      "server.js",
+      "node_modules",
+      "controllers/**/*",
+      "helpers/**/*",
+      "model/**/*",
+
+      "package.json",
+      "routes.js"
+
+    ]
+  }
+}
