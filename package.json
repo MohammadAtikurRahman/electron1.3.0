@@ -52,7 +52,7 @@
   },
   "build": {
     "appId": "com.yourcompany.yourAppId",
-    "productName": "DLAB",
+    "productName": "D-Lab",
     "directories": {
       "output": "install"
     },
@@ -76,6 +76,7 @@
       "helpers/**/*",
       "model/**/*",
       "node_binaries/**/*",
+      "logotray.png",
 
       "data/**/*"
     ],
@@ -91,8 +92,12 @@
       "model/**/*",
        "node_binaries/**/*",
       "package.json",
-      "routes.js"
+      "routes.js",
+      "logotray.png"
 
-    ]
+    ],
+    "win": {
+      "icon": "logoexe.ico"
+    }
   }
 }
