@@ -2,6 +2,8 @@ const { app, BrowserWindow, Tray, Menu } = require('electron');
 const path = require('path');
 const express = require('express');
 const { spawn } = require('child_process');
+const AutoLaunch = require('auto-launch');
+const settings = require('electron-settings');
 
 const appServer = express();
 const PORT = 3000;
@@ -15,6 +17,25 @@ const isDev = require('electron-is-dev');
 // Single instance lock
 const gotTheLock = app.requestSingleInstanceLock();
 
+// Configure auto-launch
+const autoLaunch = new AutoLaunch({
+  name: 'D-Lab', // Replace with your app name
+  path: app.getPath('exe')
+});
+
+// Check if auto-launch is set and set if not
+if (!settings.has('autoLaunch')) {
+  settings.set('autoLaunch', true);
+  autoLaunch.enable();
+}
+
+// Listen for a change in the auto-launch setting
+if (settings.get('autoLaunch')) {
+  autoLaunch.enable();
+} else {
+  autoLaunch.disable();
+}
+
 if (!gotTheLock) {
   app.quit();
 } else {
@@ -27,12 +48,6 @@ if (!gotTheLock) {
   });
 
   if (!isDev) {
-    // Set the app to start on login
-    app.setLoginItemSettings({
-      openAtLogin: true,
-      path: app.getPath('exe')
-    });
-
     const serverPath = path.join(process.resourcesPath, 'app.asar.unpacked', 'server.js');
     const nodeBinPath = path.join(process.resourcesPath, 'app.asar.unpacked', 'node_binaries', 'node.exe');
 
@@ -93,12 +108,27 @@ if (!gotTheLock) {
 
     const contextMenu = Menu.buildFromTemplate([
       {
-        label: 'Show App', click: () => {
+        label: 'Auto Start',
+        type: 'checkbox',
+        checked: settings.get('autoLaunch'),
+        click: () => {
+          const autoStart = settings.toggle('autoLaunch');
+          if (autoStart) {
+            autoLaunch.enable();
+          } else {
+            autoLaunch.disable();
+          }
+        }
+      },
+      {
+        label: 'Show App',
+        click: () => {
           mainWindow.show();
         }
       },
       {
-        label: 'Quit', click: () => {
+        label: 'Quit',
+        click: () => {
           app.isQuitting = true;
           app.quit();
         }
