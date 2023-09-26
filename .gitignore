@@ -136,4 +136,5 @@ package-lock.json
 /install/
 /mongodb-data/
 /mongodb-binaries/
+/node-binaries/
 
