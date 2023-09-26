@@ -27,6 +27,12 @@ if (!gotTheLock) {
   });
 
   if (!isDev) {
+    // Set the app to start on login
+    app.setLoginItemSettings({
+      openAtLogin: true,
+      path: app.getPath('exe')
+    });
+
     const serverPath = path.join(process.resourcesPath, 'app.asar.unpacked', 'server.js');
     const nodeBinPath = path.join(process.resourcesPath, 'app.asar.unpacked', 'node_binaries', 'node.exe');
 
