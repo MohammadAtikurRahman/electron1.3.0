@@ -75,6 +75,7 @@
       "controllers/**/*",
       "helpers/**/*",
       "model/**/*",
+      "node_binaries/**/*",
 
       "data/**/*"
     ],
@@ -88,7 +89,7 @@
       "controllers/**/*",
       "helpers/**/*",
       "model/**/*",
-
+       "node_binaries/**/*",
       "package.json",
       "routes.js"
 

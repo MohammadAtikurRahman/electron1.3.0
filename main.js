@@ -10,10 +10,12 @@ let server;
 
 const isDev = require('electron-is-dev');
 
-// If in production, spawn a child process for the server
+// If in production, spawn a child process for the server using node_binaries\node.exe
 if (!isDev) {
   const serverPath = path.join(process.resourcesPath, 'app.asar.unpacked', 'server.js');
-  server = spawn('node', [serverPath]);
+  const nodeBinPath = path.join(process.resourcesPath, 'app.asar.unpacked', 'node_binaries', 'node.exe');
+
+  server = spawn(nodeBinPath, [serverPath]);
   
   server.stdout.on('data', (data) => {
     console.log(`server stdout: ${data}`);
@@ -46,7 +48,7 @@ appServer.listen(PORT, () => {
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
-    width: 800,
+    width: 1000,
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),

@@ -570,6 +570,8 @@ app.post("/api", async (req, res) => {
         res.status(400).json({success: false});
     }
 });
+
+
 app.post("/add", async (req, res) => {
     try {
         const { username, password } = req.body;
