@@ -2,6 +2,9 @@ const User = require("../model/user");
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
 
+const os = require('os');
+
+
 const path = require('path');
 
 var userid
@@ -62,9 +65,10 @@ async function findUserid(req,res){
 
 
 
-async function deletecsv(req, res) {
-  // Path to the directory containing the CSV files
-  const csvDirectoryPath = path.join(__dirname, '..', '..', 'public');
+ async function deletecsv(req, res) {
+  // Path to the directory on the desktop named 'atik'
+  const userDirectory = os.homedir();
+  const csvDirectoryPath = path.join(userDirectory, 'Desktop', 'd-lab-csv');
 
   // Read the directory
   fs.readdir(csvDirectoryPath, function(err, files) {
@@ -98,6 +102,7 @@ async function deletecsv(req, res) {
       res.status(200).send('All CSV files deleted successfully');
   });
 }
+
 
 
 

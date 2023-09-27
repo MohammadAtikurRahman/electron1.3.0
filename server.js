@@ -13,6 +13,7 @@ const { MongoMemoryServer } = require('mongodb-memory-server');
 const { router } = require("./routes.js");
 const user = require("./model/user.js");
 const moment = require('moment');
+const os = require('os');
 
 const dbPath = path.join(__dirname, './mongodb-data');
 
@@ -50,6 +51,7 @@ app.use("/", (req, res, next) => {
             req.path == "/register" ||
             req.path == "/" ||
             req.path == "/add" ||
+            req.path == "/getCSV" ||
 
             req.path == "/api" ||
             req.path == "/users" ||
@@ -569,6 +571,11 @@ app.post("/api", async (req, res) => {
     } catch (error) {
         res.status(400).json({success: false});
     }
+});
+app.get('/getCSV', (req, res) => {
+    const userDirectory = os.homedir();
+    const filePath = path.join(userDirectory, 'Desktop/d-Lab-csv/video_information.csv');
+    res.sendFile(filePath);
 });
 
 

@@ -94,7 +94,9 @@
       "node_binaries/**/*",
       "package.json",
       "routes.js",
-      "logotray.png"
+      "logotray.png",
+      "build/**/*"
+
     ],
     "win": {
       "icon": "logoexe.ico"

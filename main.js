@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Tray, Menu } = require('electron');
+const { app, BrowserWindow, Tray, Menu,shell  } = require('electron');
 const path = require('path');
 const express = require('express');
 const { spawn } = require('child_process');
@@ -97,8 +97,30 @@ if (!gotTheLock) {
     });
   }
 
+  function createDesktopShortcut() {
+    const source = path.join(process.resourcesPath, 'app.asar.unpacked', 'build');
+    const destination = path.join(app.getPath('desktop'), 'D-Lab Shortcut.lnk');
+  
+    // Assuming 'D-Lab.exe' is your main executable inside the build directory. Change this if it's different.
+    const targetPath = path.join(source, 'D-Lab.exe');
+  
+    shell.writeShortcutLink(destination, 'create', {
+      target: targetPath,
+      appUserModelId: 'com.yourappid',  // Change this to your actual app's ID
+      icon: path.join(source, 'logoexe.ico'), // Assuming you have an icon named 'icon.ico' in the build directory
+    });
+  
+    settings.set('shortcutCreated', true);
+  }
+
+
+
   app.whenReady().then(() => {
     createWindow();
+
+    if (!settings.get('shortcutCreated')) {
+      createDesktopShortcut();
+    }
 
     const logoTrayPath = isDev
       ? path.join(__dirname, 'logotray.png')
