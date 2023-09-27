@@ -36,7 +36,10 @@ To clone and run this repository you'll need [Git](https://git-scm.com) and [Nod
 ```bash
 
 npm run dist
+
 # Run the app
+# check the install folder
+# install the exe file
 
 ```
 
