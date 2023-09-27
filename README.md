@@ -27,6 +27,12 @@ npm install
 # Run the app
 npm start
 ```
+## To Embeded database setting for production
+
+download [mongodb](https://www.mongodb.com/try/download/community) Binary file and unzip 
+download [nodejs](https://nodejs.org/en/download) Binary file and unzip
+1. create a folder name mongodb-binaries in the project file and paste the unzip file from mongodb binaries
+2. create a folder name node_binaries in the project file paste the unzip file from nodejs binaries
 
 
 ## To Production
